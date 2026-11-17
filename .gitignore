@@ -1,0 +1,9 @@
+# Exported packages contain site content, solutions and logs.
+work/
+
+# Real migration configs name tenants and environments; keep only the sample.
+config/*.json
+!config/migration.sample.json
+config/*.deployment.yml
+
+*.log

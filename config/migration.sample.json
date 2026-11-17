@@ -1,0 +1,29 @@
+{
+  "name": "contoso-portal",
+  "workDir": "../work",
+  "source": {
+    "url": "https://contoso-sandbox.crm.dynamics.com",
+    "tenantId": "00000000-0000-0000-0000-000000000000",
+    "auth": {
+      "mode": "interactive"
+    }
+  },
+  "target": {
+    "url": "https://fabrikam-prod.crm.dynamics.com",
+    "tenantId": "11111111-1111-1111-1111-111111111111",
+    "auth": {
+      "mode": "servicePrincipal",
+      "clientId": "22222222-2222-2222-2222-222222222222",
+      "clientSecretEnvVar": "M2P_TARGET_SECRET"
+    }
+  },
+  "site": {
+    "websiteId": "33333333-3333-3333-3333-333333333333"
+  },
+  "solutions": [
+    {
+      "name": "ContosoPortalSchema",
+      "managed": true
+    }
+  ]
+}
