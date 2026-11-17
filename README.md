@@ -39,14 +39,26 @@ These steps are still done by hand in the target environment:
 # Copy the sample and fill in your environments
 Copy-Item .\config\migration.sample.json .\config\contoso.json
 
-.\Mover2P.ps1 export   -Config .\config\contoso.json
-.\Mover2P.ps1 check    -Config .\config\contoso.json
-.\Mover2P.ps1 import   -Config .\config\contoso.json -DryRun   # shows the pac commands only
-.\Mover2P.ps1 import   -Config .\config\contoso.json
-.\Mover2P.ps1 validate -Config .\config\contoso.json
+# Prefer the .cmd launcher (avoids "not digitally signed" / execution policy errors)
+.\Mover2P.cmd export   -Config .\config\contoso.json
+.\Mover2P.cmd check    -Config .\config\contoso.json
+.\Mover2P.cmd import   -Config .\config\contoso.json -DryRun
+.\Mover2P.cmd import   -Config .\config\contoso.json
+.\Mover2P.cmd validate -Config .\config\contoso.json
 ```
 
-If script execution is blocked, run it as `powershell -ExecutionPolicy Bypass -File .\Mover2P.ps1 ...`.
+If you still prefer calling the `.ps1` directly and get a "not digitally signed" error, either use the `.cmd` above or run:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Mover2P.ps1 export -Config .\config\contoso.json
+```
+
+Or unblock scripts for the current PowerShell window only (does not change the machine policy):
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\Mover2P.ps1 export -Config .\config\contoso.json
+```
 
 Options:
 
